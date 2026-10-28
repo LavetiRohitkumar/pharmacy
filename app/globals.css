@@ -1,0 +1,129 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-brand-blue: #0759bd;
+  --color-brand-green: #269d49;
+  --color-brand-copy: #687d9c;
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@layer base {
+  * {
+    @apply box-border;
+  }
+
+  html {
+    @apply min-h-full;
+  }
+
+  body {
+    @apply m-0 min-h-screen;
+  }
+}
+
+@keyframes ticker-scroll {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes hero-rise-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 22px, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes hero-art-enter {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 18px, 0) scale(0.97);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes gentle-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-9px);
+  }
+}
+
+@keyframes reveal-on-scroll {
+  from {
+    opacity: 0;
+    transform: translateY(26px) scale(0.985);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes ticker-mark-turn {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.hero-copy-enter {
+  animation: hero-rise-in 700ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.hero-art-enter {
+  animation: hero-art-enter 900ms cubic-bezier(0.2, 0.7, 0.2, 1) 100ms both;
+}
+
+.hero-image-float {
+  animation: gentle-float 6s ease-in-out 1s infinite;
+}
+
+.hero-card-float {
+  animation: gentle-float 5s ease-in-out 1.2s infinite;
+}
+
+.ticker-mark-motion {
+  animation: ticker-mark-turn 24s linear infinite;
+}
+
+@supports (animation-timeline: view()) {
+  .reveal-on-scroll {
+    animation: reveal-on-scroll linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 45%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto !important;
+  }
+
+  .hero-copy-enter,
+  .hero-art-enter,
+  .hero-image-float,
+  .hero-card-float,
+  .ticker-mark-motion,
+  .reveal-on-scroll {
+    animation: none !important;
+  }
+}
